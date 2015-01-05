@@ -1,3 +1,7 @@
+# TODO:
+#   - Save the history of commnands in a file, read it before each session
+#   - Allow multiple regions
+#
 import sublime
 import sublime_plugin
 import subprocess
@@ -46,10 +50,10 @@ def STDOUT.write(what)
    super(what)
 end
 
-# execure the code
+# execute the code
 begin
-  # insert a space if input was a selection, if it was a line insert \n
-  print($text ? " " : "\n")
+  # # insert a space if input was a selection, if it was a line insert \n
+  # print($text ? " " : "\n")
   r = eval($code)
 rescue Object
   r = $!.class.to_s
@@ -72,7 +76,7 @@ end
 			sublime.status_message("Only single selections supported!")
 			return
 
-	
+
 		self.data = self.view.substr(sel[0])
 		self.sel = sel[0]
 
@@ -86,14 +90,14 @@ end
 
 
 class RubyExecSelectionCommand(RubyExecBaseCommand):
-	
+
 	def on_done(self, text):
 		data = self.do_call(text)
 		sublime.message_dialog(data)
 
 
 class RubyExecSelectionReplaceCommand(RubyExecBaseCommand):
-	
+
 	def on_done(self, text):
 		data = self.do_call(text)
-		sublime.active_window().run_command("ruby_update_selection", {"sel": [self.sel.begin(), self.sel.end()], "data": data})		
+		sublime.active_window().run_command("ruby_update_selection", {"sel": [self.sel.begin(), self.sel.end()], "data": data})
