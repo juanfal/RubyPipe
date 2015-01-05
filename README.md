@@ -6,7 +6,7 @@ RubyPipe allows you to pipe selected text in Sublime Text 2 or 3 through Ruby.
 To run the command open the command palette and search for Ruby. The two choices
 are: "Pipe Selection with Ruby" and "Pipe Selection with Ruby (Replace)". Both
 will perform similar actions but the latter will replace the selected text with
-the ouput of the Ruby command.
+the output of the Ruby command.
 
 For example consider the following text:
 
@@ -22,4 +22,12 @@ possibilities for this plugin are to use Ruby to quickly reformat text by using
 ruby to process the input.
 
 In your Ruby script the content of the selection is available in all of the
-following variables: `$_`, `$select`, or `$text`. 
+following variables: `$_`, `$select`, or `$text`.
+
+More examples
+---
+
+A way to add numbering to every line:
+
+    i = 0; puts $_.lines.map {|line| sprintf "%2d %s" % [i += 1, line]}
+
